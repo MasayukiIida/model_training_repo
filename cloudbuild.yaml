@@ -6,7 +6,7 @@ steps:
   args: ['push', 'gcr.io/udemy-mlops/bank-campaign-model']
   args: ['push', 'us-west1-docker.pkg.dev/flash-precept-437022-j5/bank-campaign-model/bank-campaign-model']
 
-- name: 'us-west1-docker.pkg.dev/flash-precept-437022-j5/xgboost-coupon-model/xgboost-coupon-model'
+- name: 'us-west1-docker.pkg.dev/flash-precept-437022-j5/bank-campaign-model/bank-campaign-model'
   entrypoint: 'bash'
   args:
    - '-c'
