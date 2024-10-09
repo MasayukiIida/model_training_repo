@@ -1,11 +1,12 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/udemy-mlops/bank-campaign-model', '.']
+  args: ['buildx', 'build', '--platform', 'linux/amd64', '-t', 'us-west1-docker.pkg.dev/flash-precept-437022-j5/bank-campaign-model/bank-campaign-model', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/udemy-mlops/bank-campaign-model']
+  args: ['push', 'us-west1-docker.pkg.dev/flash-precept-437022-j5/bank-campaign-model/bank-campaign-model']
 
-- name: 'gcr.io/udemy-mlops/bank-campaign-model'
+- name: 'us-west1-docker.pkg.dev/flash-precept-437022-j5/xgboost-coupon-model/xgboost-coupon-model'
   entrypoint: 'bash'
   args:
    - '-c'
@@ -13,13 +14,13 @@ steps:
       python -m pytest
 
 - name: 'gcr.io/cloud-builders/git'
-  args: ['clone', 'https://github.com/sidoncloud/model-training-repo.git']
+  args: ['clone', 'https://github.com/MasayukiIida/model-training-repo.git']
 
 - name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', 'model-training-repo/bank_campaign_model_training.py', 'gs://us-central1-mlops-airflow-faa6f9bc-bucket/dags']
+  args: ['cp', 'model-training-repo/bank_campaign_model_training.py', 'gs://us-west1-masa-udemy-mlops-c-609ee780-bucket/dags']
 
 images:
-- 'gcr.io/udemy-mlops/bank-campaign-model'
+- 'us-west1-docker.pkg.dev/flash-precept-437022-j5/bank-campaign-model/bank-campaign-model'
 
 options:
   logging: CLOUD_LOGGING_ONLY
